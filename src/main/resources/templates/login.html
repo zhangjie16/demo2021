@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<form role="form" >  <!--  action = "/loginIn" method="post" -->
+    账号：<input type="text" id="name" name = "name"> <br>
+    密码：<input type="password" id = "password" name = "password"> <br>
+    <input type="submit" id = "login" value = "login" onclick="buttionClick()">
+</form>
+
+</body>
+
+<script>
+
+    function buttionClick(){
+        debugger;
+        var name = $("#name").val();
+        var password = $("#password").val();
+        $.ajax({
+            url:"/loginIn",
+            data:{name:name,password:password},
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                alert("success");
+            }
+        });
+    }
+/*
+    $(function(){
+        //$("#login").click();
+
+        alert("load");
+    });
+    */
+</script>
+</html>

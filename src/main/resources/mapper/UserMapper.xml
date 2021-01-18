@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.zhangjieDemo.mapper.UserMapper">
+    <select id="getInfo" parameterType="String" resultType="com.example.zhangjieDemo.bean.UserBean">
+        SELECT * FROM user WHERE name = #{name} AND password = #{password}
+    </select>
+    
+    <resultMap id="getScore" type="com.example.zhangjieDemo.bean.UserScore">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="score" column="score"></result>
+        <association property="user" javaType="com.example.zhangjieDemo.bean.UserBean">
+
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+            <result property="password" column="password"></result>
+        </association>
+
+
+    </resultMap>
+
+    <select id="getUserScore" resultMap="getScore">
+
+        select a.id,a.name,a.password,b.score from user a right join score b on a.name = b.name
+    </select>
+
+</mapper>
